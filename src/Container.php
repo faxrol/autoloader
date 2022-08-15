@@ -1,4 +1,5 @@
 <?php
+
 namespace Laz0r\AutoLoader;
 
 /**
@@ -8,6 +9,7 @@ namespace Laz0r\AutoLoader;
 class Container {
 
 	protected BuilderInterface $Builder;
+
 	protected ManagerInterface $Manager;
 
 	/**
@@ -47,7 +49,7 @@ class Container {
 	 *
 	 * Registers an instance of AutoLoaderInterface with the manager.
 	 *
-	 * @param \Laz0r\AutoLoader\AutoLoaderInterface $loader
+	 * @param \Laz0r\AutoLoader\AutoLoaderInterface $AutoLoader
 	 *
 	 * @return string Unique identifier for the AutoLoaderInterface object
 	 */
@@ -64,7 +66,7 @@ class Container {
 	 *
 	 * @return $this
 	 */
-	public function setBuilder(BuilderInterface $Builder): Container {
+	public function setBuilder(BuilderInterface $Builder) {
 		$this->Builder = $Builder;
 
 		return $this;
@@ -77,7 +79,7 @@ class Container {
 	 *
 	 * @return $this
 	 */
-	public function setManager(ManagerInterface $Manager): Container {
+	public function setManager(ManagerInterface $Manager) {
 		$this->Manager = $Manager;
 
 		return $this;
@@ -108,7 +110,7 @@ class Container {
 		}
 
 		return $this->register(
-			$Builder->build()
+			$Builder->build(),
 		);
 	}
 

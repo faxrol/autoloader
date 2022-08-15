@@ -1,10 +1,16 @@
 <?php
+
 namespace Laz0r\AutoLoaderTest;
 
-use Laz0r\AutoLoader\Exception\AlreadyRegisteredException;
-use Laz0r\AutoLoader\Exception\InvalidIdentifierException;
-use Laz0r\AutoLoader\Manager;
-use Laz0r\AutoLoader\{AutoLoaderInterface, ManagerInterface};
+use Laz0r\AutoLoader\Exception\{
+	AlreadyRegisteredException,
+	InvalidIdentifierException,
+};
+use Laz0r\AutoLoader\{
+	AutoLoaderInterface,
+	Manager,
+	ManagerInterface,
+};
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
@@ -27,7 +33,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testHasWithUnknownIdentifier() {
+	public function testHasWithUnknownIdentifier(): void {
 		$Sut = new Manager();
 
 		$result = $Sut->has("Yolo");
@@ -40,7 +46,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testHasWithKnownIdentifier() {
+	public function testHasWithKnownIdentifier(): void {
 		$Property = (new ReflectionClass(Manager::class))
 			->getProperty("loaders");
 		$AutoLoader = $this->createStub(AutoLoaderInterface::class);
@@ -59,7 +65,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testRegisterThrowsException() {
+	public function testRegisterThrowsException(): void {
 		$this->expectException(AlreadyRegisteredException::class);
 		$this->expectExceptionCode(17);
 
@@ -122,7 +128,7 @@ class ManagerTest extends TestCase {
 			->method("setLoader")
 			->with(
 				$this->equalTo("YOLO"),
-				$this->identicalTo($AutoLoader)
+				$this->identicalTo($AutoLoader),
 			);
 		$MockSut->expects($this->once())
 			->method("getAutoloadFunction")
@@ -132,7 +138,7 @@ class ManagerTest extends TestCase {
 			->method("wrapSplAutoloadRegister")
 			->with(
 				$this->identicalTo($callable),
-				$this->equalTo(true)
+				$this->equalTo(true),
 			);
 
 		$result = $MockSut->register($AutoLoader, true);
@@ -147,7 +153,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testRegisterReturnsIdentifier($result) {
+	public function testRegisterReturnsIdentifier($result): void {
 		$this->assertSame("YOLO", $result);
 	}
 
@@ -156,7 +162,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testUnregisterThrowsException() {
+	public function testUnregisterThrowsException(): void {
 		$this->expectException(InvalidIdentifierException::class);
 		$this->expectExceptionCode(2);
 
@@ -191,7 +197,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testUnregister() {
+	public function testUnregister(): array {
 		$callable = function() {};
 		$AutoLoader = $this->createStub(AutoLoaderInterface::class);
 		$MockSut = $this->getMockBuilder(Manager::class)
@@ -235,7 +241,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testUnregisterReturnsSelf($result) {
+	public function testUnregisterReturnsSelf(array $result): void {
 		$hash0 = spl_object_hash($result[0]);
 		$hash1 = spl_object_hash($result[1]);
 
@@ -247,7 +253,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testGetAutoloadFunction() {
+	public function testGetAutoloadFunction(): void {
 		$Sut = new Manager();
 		$Method = (new ReflectionClass(Manager::class))
 			->getMethod("getAutoloadFunction");
@@ -265,7 +271,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testGetLoader() {
+	public function testGetLoader(): void {
 		$Sut = new Manager();
 		$Class = new ReflectionClass(Manager::class);
 		$Method = $Class->getMethod("getLoader");
@@ -289,7 +295,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testGetIdentifierReturnsString() {
+	public function testGetIdentifierReturnsString(): void {
 		$Sut = new Manager();
 		$Method = (new ReflectionClass(Manager::class))
 			->getMethod("getIdentifier");
@@ -306,7 +312,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testGetIdentifier() {
+	public function testGetIdentifier(): void {
 		$Object0 = (object)[];
 		$Object1 = (object)[];
 		$Sut = new Manager();
@@ -327,7 +333,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testRemoveLoader() {
+	public function testRemoveLoader(): void {
 		$Sut = new Manager();
 		$Class = new ReflectionClass(Manager::class);
 		$Method = $Class->getMethod("removeLoader");
@@ -344,8 +350,10 @@ class ManagerTest extends TestCase {
 
 	/**
 	 * @covers ::setLoader
+	 *
+	 * @return array
 	 */
-	public function testSetLoaderSetsProperty() {
+	public function testSetLoaderSetsProperty(): array {
 		$Sut = new Manager();
 		$Class = new ReflectionClass(Manager::class);
 		$Method = $Class->getMethod("setLoader");
@@ -371,7 +379,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSetLoaderSetsPropertyAssignsLoader($result) {
+	public function testSetLoaderSetsPropertyAssignsLoader(array $result): void {
 		$hash0 = spl_object_hash($result[0]);
 		$hash1 = spl_object_hash($result[1]["Yolo"]);
 
@@ -385,7 +393,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testWrapSplAutoloadRegister() {
+	public function testWrapSplAutoloadRegister(): void {
 		spl_autoload_register(function(){});
 
 		$autoloaders = spl_autoload_functions();
@@ -412,7 +420,7 @@ class ManagerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testWrapSplAutoloadUnregister() {
+	public function testWrapSplAutoloadUnregister(): void {
 		spl_autoload_register(function(){});
 
 		$autoloaders = spl_autoload_functions();

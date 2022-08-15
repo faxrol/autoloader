@@ -1,12 +1,20 @@
 <?php
+
 namespace Laz0r\AutoLoader;
+
+use Laz0r\AutoLoader\Exception\{
+	AlreadyRegisteredException,
+	InvalidIdentifierException,
+};
 
 /**
  * Registers (and unregisters) AutoLoaderInterface instances
  */
 class Manager implements ManagerInterface {
 
-	/** @var \Laz0r\AutoLoader\AutoLoaderInterface[] */
+	/**
+	 * @var \Laz0r\AutoLoader\AutoLoaderInterface[]
+	 */
 	protected array $loaders = [];
 
 	public function has(string $identifier): bool {
@@ -24,15 +32,15 @@ class Manager implements ManagerInterface {
 
 			$this->wrapSplAutoloadRegister(
 				$this->getAutoloadFunction($AutoLoader),
-				$prepend
+				$prepend,
 			);
 
 			return $ret;
 		}
 
-		throw new Exception\AlreadyRegisteredException(
+		throw new AlreadyRegisteredException(
 			"Instance of AutoLoaderInterface already registered",
-			17
+			17,
 		);
 	}
 
@@ -43,22 +51,22 @@ class Manager implements ManagerInterface {
 			$this->removeLoader($identifier);
 
 			$this->wrapSplAutoloadUnregister(
-				$this->getAutoloadFunction($AutoLoader)
+				$this->getAutoloadFunction($AutoLoader),
 			);
 
 			return $this;
 		}
 
-		throw new Exception\InvalidIdentifierException(
+		throw new InvalidIdentifierException(
 			sprintf("Invalid identifier \"%s\".", $identifier),
-			2
+			2,
 		);
 	}
 
 	/**
 	 * Get the autoload function of an AutoLoaderInterface
 	 *
-	 * @param \Laz0r\AutoLoader\AutoLoaderInterface $autoloader
+	 * @param \Laz0r\AutoLoader\AutoLoaderInterface $AutoLoader
 	 *
 	 * @return callable
 	 * @psalm-return callable(string):void
@@ -66,7 +74,10 @@ class Manager implements ManagerInterface {
 	protected function getAutoloadFunction(
 		AutoLoaderInterface $AutoLoader
 	): callable {
-		/** @var callable(string):void $ret */
+		/**
+		 * @var callable $ret
+		 * @psalm-var callable(string):void $ret
+		 */
 		$ret = [$AutoLoader, "load"];
 
 		return $ret;
@@ -90,7 +101,7 @@ class Manager implements ManagerInterface {
 	 *
 	 * @return string
 	 */
-	protected function getIdentifier($Object): string {
+	protected function getIdentifier(object $Object): string {
 		return spl_object_hash($Object);
 	}
 
@@ -133,7 +144,6 @@ class Manager implements ManagerInterface {
 		callable $autoload_function,
 		bool $prepend = false
 	): void {
-		/** @psalm-suppress MixedArgumentTypeCoercion */
 		spl_autoload_register($autoload_function, true, $prepend);
 	}
 
@@ -145,7 +155,9 @@ class Manager implements ManagerInterface {
 	 *
 	 * @return void
 	 */
-	protected function wrapSplAutoloadUnregister(callable $autoload_function): void {
+	protected function wrapSplAutoloadUnregister(
+		callable $autoload_function
+	): void {
 		spl_autoload_unregister($autoload_function);
 	}
 

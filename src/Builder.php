@@ -1,6 +1,8 @@
 <?php
+
 namespace Laz0r\AutoLoader;
 
+use Laz0r\AutoLoader\Exception\InvalidAutoLoaderException;
 use ReflectionClass;
 
 /**
@@ -8,6 +10,7 @@ use ReflectionClass;
  */
 class Builder implements BuilderInterface {
 
+	/** @var string */
 	protected const DEFAULT_PRODUCT = Psr4AutoLoader::class;
 
 	/**
@@ -25,7 +28,7 @@ class Builder implements BuilderInterface {
 	/**
 	 * Constructor
 	 *
-	 * @param null|string $product (Optional) Class name of AutoLoaderInterface to build
+	 * @param string|null $product (Optional) Class name of AutoLoaderInterface to build
 	 * @psalm-param ?class-string $product
 	 */
 	public function __construct(?string $product = null) {
@@ -35,7 +38,11 @@ class Builder implements BuilderInterface {
 		$this->setProduct($product ?? $qcn);
 	}
 
-	public function add(string $namespace, string $path, bool $prepend = false): BuilderInterface {
+	public function add(
+		string $namespace,
+		string $path,
+		bool $prepend = false
+	): BuilderInterface {
 		$namespace = $this->canonicalizeNamespace($namespace);
 		$path = $this->canonicalizePath($path);
 		$paths = $this->namespaces[$namespace] ?? [];
@@ -53,7 +60,7 @@ class Builder implements BuilderInterface {
 
 	public function build(): AutoLoaderInterface {
 		return $this->configureLoader(
-			$this->createLoader()
+			$this->createLoader(),
 		);
 	}
 
@@ -79,15 +86,16 @@ class Builder implements BuilderInterface {
 	 * Set class name of AutoLoaderInterface to build
 	 *
 	 * @param string $product
+	 * @psalm-param class-string $product
 	 *
 	 * @return $this
 	 * @throws \Laz0r\AutoLoader\Exception\InvalidAutoLoaderException
 	 */
-	public function setProduct(string $product): Builder {
+	public function setProduct(string $product) {
 		if (!is_subclass_of($product, AutoLoaderInterface::class)) {
-			throw new Exception\InvalidAutoLoaderException(sprintf(
+			throw new InvalidAutoLoaderException(sprintf(
 				"AutoLoaderInterface not implemented by \"%s\"",
-				$product
+				$product,
 			));
 		}
 
@@ -158,8 +166,8 @@ class Builder implements BuilderInterface {
 	 * Return canonical path
 	 *
 	 * Used to ensure the paths ends with a "/", but that made it
-	 * impossible to add a namespacae without a path,  using just
-	 * the include_path to resolve filenames.  It was kept so any
+	 * impossible to add a namespace without a path, using just
+	 * the include_path to resolve filenames. It was kept so any
 	 * derivative class can easily override this behavior.
 	 *
 	 * @param string $path

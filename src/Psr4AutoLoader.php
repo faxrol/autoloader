@@ -1,4 +1,5 @@
 <?php
+
 namespace Laz0r\AutoLoader;
 
 /**
@@ -28,7 +29,7 @@ class Psr4AutoLoader extends AbstractAutoLoader {
 	 */
 	protected function getPathFromQcn(string $qcn) {
 		return $this->searchClass(
-			...$this->splitNamespace($qcn)
+			...$this->splitNamespace($qcn),
 		);
 	}
 
@@ -72,7 +73,7 @@ class Psr4AutoLoader extends AbstractAutoLoader {
 
 		return $this->searchClass(
 			$split[0],
-			$split[1] . DIRECTORY_SEPARATOR . $class
+			$split[1] . DIRECTORY_SEPARATOR . $class,
 		);
 	}
 
@@ -83,7 +84,7 @@ class Psr4AutoLoader extends AbstractAutoLoader {
 	 *
 	 * @return string[] E.g. ["Foo\\Bar", "Quux"]
 	 */
-	protected function splitNamespace(string $namespace) {
+	protected function splitNamespace(string $namespace): array {
 		$pos = strrpos($namespace, "\\");
 
 		return $pos !== false

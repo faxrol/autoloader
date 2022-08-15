@@ -1,4 +1,5 @@
 <?php
+
 namespace Laz0r\AutoLoader;
 
 /**
@@ -13,9 +14,13 @@ interface BuilderInterface {
 	 * @param string $path      e.g. "./vendor/foo/bar/src"
 	 * @param bool   $prepend   Whether to prepend or append the path
 	 *
-	 * @return \Laz0r\AutoLoader\BuilderInterface
+	 * @return $this
 	 */
-	public function add(string $namespace, string $path, bool $prepend = false): BuilderInterface;
+	public function add(
+		string $namespace,
+		string $path,
+		bool $prepend = false
+	): self;
 
 	/**
 	 * Build an instance of AutoLoaderInterface
@@ -32,9 +37,9 @@ interface BuilderInterface {
 	 * @param string $namespace e.g. "Foo\\Bar"
 	 * @param string $path      e.g. "./vendor/foo/bar/src"
 	 *
-	 * @return \Laz0r\AutoLoader\BuilderInterface
+	 * @return $this
 	 */
-	public function set(string $namespace, string $path): BuilderInterface;
+	public function set(string $namespace, string $path): self;
 
 }
 

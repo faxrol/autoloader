@@ -1,4 +1,5 @@
 <?php
+
 namespace Laz0r\AutoLoaderTest;
 
 use Laz0r\AutoLoader\AbstractAutoLoader;
@@ -10,7 +11,7 @@ use ReflectionClass;
  */
 class AbstractAutoLoaderTest extends TestCase {
 
-	private static $result;
+	private static string $result;
 
 	public static function setupBeforeClass(): void {
 		require_once __DIR__ . "/../src/AutoLoaderInterface.php";
@@ -19,11 +20,20 @@ class AbstractAutoLoaderTest extends TestCase {
 
 	/**
 	 * @covers ::requireFile
+	 *
+	 * @return void
 	 */
-	public function testRequireFile() {
+	public function testRequireFile(): void {
 		$Sut = new class() extends AbstractAutoLoader {
 
+			/**
+			 * @var string
+			 */
 			protected const INCLUDE_HELPER = AbstractAutoLoaderTest::class;
+
+			/**
+			 * @var string
+			 */
 			protected const REQUIRE_METHOD = "baww";
 
 			public function load(string $qcn): void {
@@ -39,7 +49,7 @@ class AbstractAutoLoaderTest extends TestCase {
 		$this->assertSame("amaze", self::$result);
 	}
 
-	public static function baww(string $s) {
+	public static function baww(string $s): void {
 		self::$result = $s;
 	}
 

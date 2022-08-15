@@ -1,4 +1,5 @@
 <?php
+
 namespace Laz0r\AutoLoaderTest;
 
 use Laz0r\AutoLoader\AbstractIncludeHelper;
@@ -16,92 +17,124 @@ class AbstractIncludeHelperTest extends TestCase {
 
 	/**
 	 * @covers ::includeFile
+	 *
+	 * @return void
 	 */
-	public function testIncludeFileIncludesFile() {
+	public function testIncludeFileIncludesFile(): void {
 		$before = get_included_files();
-		AbstractIncludeHelper::includeFile(__DIR__ . "/_files/dummy.php");
+		AbstractIncludeHelper::includeFile(
+			__DIR__ . "/_files/dummy.php",
+		);
 		$after = get_included_files();
 
 		$this->assertSame(
 			[__DIR__ . "/_files/dummy.php"],
-			array_values(array_diff($after, $before))
+			array_values(array_diff($after, $before)),
 		);
 	}
 
 	/**
 	 * @covers ::includeFile
+	 *
+	 * @return void
 	 */
-	public function testIncludeFileReturnsResult() {
-		$res = AbstractIncludeHelper::includeFile(__DIR__ . "/_files/return.php");
+	public function testIncludeFileReturnsResult(): void {
+		$res = AbstractIncludeHelper::includeFile(
+			__DIR__ . "/_files/return.php",
+		);
 
 		$this->assertTrue($res);
 	}
 
 	/**
 	 * @covers ::includeFileOnce
+	 *
+	 * @return void
 	 */
-	public function testIncludeFileOnceIncludesFile() {
+	public function testIncludeFileOnceIncludesFile(): void {
 		$before = get_included_files();
-		AbstractIncludeHelper::includeFileOnce(__DIR__ . "/_files/dummy.php");
+		AbstractIncludeHelper::includeFileOnce(
+			__DIR__ . "/_files/dummy.php",
+		);
 		$after = get_included_files();
 
 		$this->assertSame(
 			[__DIR__ . "/_files/dummy.php"],
-			array_values(array_diff($after, $before))
+			array_values(array_diff($after, $before)),
 		);
 	}
 
 	/**
 	 * @covers ::includeFileOnce
+	 *
+	 * @return void
 	 */
-	public function testIncludeFileOnceReturnsResult() {
-		$res = AbstractIncludeHelper::includeFileOnce(__DIR__ . "/_files/return.php");
+	public function testIncludeFileOnceReturnsResult(): void {
+		$res = AbstractIncludeHelper::includeFileOnce(
+			__DIR__ . "/_files/return.php",
+		);
 
 		$this->assertTrue($res);
 	}
 
 	/**
 	 * @covers ::requireFile
+	 *
+	 * @return void
 	 */
-	public function testRequireFileIncludesFile() {
+	public function testRequireFileIncludesFile(): void {
 		$before = get_included_files();
-		AbstractIncludeHelper::requireFile(__DIR__ . "/_files/dummy.php");
+		AbstractIncludeHelper::requireFile(
+			__DIR__ . "/_files/dummy.php",
+		);
 		$after = get_included_files();
 
 		$this->assertSame(
 			[__DIR__ . "/_files/dummy.php"],
-			array_values(array_diff($after, $before))
+			array_values(array_diff($after, $before)),
 		);
 	}
 
 	/**
 	 * @covers ::requireFile
+	 *
+	 * @return void
 	 */
-	public function testRequireFileReturnsResult() {
-		$res = AbstractIncludeHelper::requireFile(__DIR__ . "/_files/return.php");
+	public function testRequireFileReturnsResult(): void {
+		$res = AbstractIncludeHelper::requireFile(
+			__DIR__ . "/_files/return.php",
+		);
 
 		$this->assertTrue($res);
 	}
 
 	/**
 	 * @covers ::requireFileOnce
+	 *
+	 * @return void
 	 */
-	public function testRequireFileOnceIncludesFile() {
+	public function testRequireFileOnceIncludesFile(): void {
 		$before = get_included_files();
-		AbstractIncludeHelper::requireFileOnce(__DIR__ . "/_files/dummy.php");
+		AbstractIncludeHelper::requireFileOnce(
+			__DIR__ . "/_files/dummy.php",
+		);
 		$after = get_included_files();
 
 		$this->assertSame(
 			[__DIR__ . "/_files/dummy.php"],
-			array_values(array_diff($after, $before))
+			array_values(array_diff($after, $before)),
 		);
 	}
 
 	/**
 	 * @covers ::requireFileOnce
+	 *
+	 * @return void
 	 */
-	public function testRequireFileOnceReturnsResult() {
-		$res = AbstractIncludeHelper::requireFileOnce(__DIR__ . "/_files/return.php");
+	public function testRequireFileOnceReturnsResult(): void {
+		$res = AbstractIncludeHelper::requireFileOnce(
+			__DIR__ . "/_files/return.php",
+		);
 
 		$this->assertTrue($res);
 	}

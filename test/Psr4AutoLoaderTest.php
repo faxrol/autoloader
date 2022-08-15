@@ -1,7 +1,8 @@
 <?php
+
 namespace Laz0r\AutoLoaderTest;
 
-use Laz0r\AutoLoader\{AutoLoaderInterface, Psr4AutoLoader};
+use Laz0r\AutoLoader\Psr4AutoLoader;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
@@ -21,7 +22,7 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testLoadUnknownClass() {
+	public function testLoadUnknownClass(): void {
 		$MockSut = $this->getMockBuilder(Psr4AutoLoader::class)
 			->setMethods([
 				"getPathFromQcn",
@@ -44,7 +45,7 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testLoadKnownClass() {
+	public function testLoadKnownClass(): void {
 		$MockSut = $this->getMockBuilder(Psr4AutoLoader::class)
 			->setMethods([
 				"getPathFromQcn",
@@ -65,8 +66,10 @@ class Psr4AutoLoaderTest extends TestCase {
 
 	/**
 	 * @covers ::getPathFromQcn
+	 *
+	 * @return void
 	 */
-	public function testGetPathFromQcn() {
+	public function testGetPathFromQcn(): void {
 		$MockSut = $this->getMockBuilder(Psr4AutoLoader::class)
 				->setMethods(["splitNamespace", "searchClass"])
 				->getMock();
@@ -78,7 +81,7 @@ class Psr4AutoLoaderTest extends TestCase {
 			->method("searchClass")
 			->with(
 				$this->identicalTo("Laz0r\\AutoLoader"),
-				$this->identicalTo("Amaze")
+				$this->identicalTo("Amaze"),
 			)
 			->will($this->returnValue("very.php"));
 
@@ -97,7 +100,7 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testResolveInclude() {
+	public function testResolveInclude(): void {
 		$Sut = new Psr4AutoLoader();
 		$Method = (new ReflectionClass(Psr4AutoLoader::class))
 			->getMethod("resolveInclude");
@@ -139,7 +142,7 @@ class Psr4AutoLoaderTest extends TestCase {
 			->method("searchClass")
 			->with(
 				$this->equalTo("Laz0r"),
-				$this->equalTo("Widget" . DIRECTORY_SEPARATOR . "Nuke")
+				$this->equalTo("Widget" . DIRECTORY_SEPARATOR . "Nuke"),
 			)
 			->will($this->returnValue("/nuke.php"));
 
@@ -157,7 +160,7 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSearchClassRecursiveReturnValue($result) {
+	public function testSearchClassRecursiveReturnValue($result): void {
 		$this->assertSame("/nuke.php", $result);
 	}
 
@@ -198,7 +201,7 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSearchClassEmptyNamespaceReturnsFalse($result) {
+	public function testSearchClassEmptyNamespaceReturnsFalse($result): void {
 		$this->assertFalse($result);
 	}
 
@@ -234,7 +237,7 @@ class Psr4AutoLoaderTest extends TestCase {
 				[
 					$this->equalTo("/laz0r/widget"),
 					$this->equalTo("Nuke"),
-				]
+				],
 			)
 			->will($this->onConsecutiveCalls(false, "/nuke.php"));
 
@@ -254,7 +257,7 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSearchClassReturnsFile($result) {
+	public function testSearchClassReturnsFile($result): void {
 		$this->assertSame("/nuke.php", $result);
 	}
 
@@ -263,7 +266,7 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testSplitNamespace() {
+	public function testSplitNamespace(): array {
 		$Sut = new Psr4AutoLoader();
 		$Method = (new ReflectionClass(Psr4AutoLoader::class))
 			->getMethod("splitNamespace");
@@ -284,7 +287,7 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSplitNamespaceArrayCount($result) {
+	public function testSplitNamespaceArrayCount(array $result): void {
 		$this->assertCount(2, $result);
 	}
 
@@ -295,7 +298,7 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSplitNamespaceArrayFirstMember($result) {
+	public function testSplitNamespaceArrayFirstMember(array $result): void {
 		$this->assertSame("Laz0r\\Widget", $result[0]);
 	}
 
@@ -306,7 +309,7 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSplitNamespaceArraySecondMember($result) {
+	public function testSplitNamespaceArraySecondMember(array $result): void {
 		$this->assertSame("Nuke", $result[1]);
 	}
 
@@ -315,7 +318,7 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testSplitNamespaceWithoutNamespace() {
+	public function testSplitNamespaceWithoutNamespace(): array {
 		$Sut = new Psr4AutoLoader();
 		$Method = (new ReflectionClass(Psr4AutoLoader::class))
 			->getMethod("splitNamespace");
@@ -336,7 +339,9 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSplitNamespaceWithoutNamespaceArrayCount($result) {
+	public function testSplitNamespaceWithoutNamespaceArrayCount(
+		array $result
+	): void {
 		$this->assertCount(2, $result);
 	}
 
@@ -347,7 +352,9 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSplitNamespaceWithoutNamespaceArrayFirstMember($result) {
+	public function testSplitNamespaceWithoutNamespaceArrayFirstMember(
+		array $result
+	): void {
 		$this->assertSame("", $result[0]);
 	}
 
@@ -358,7 +365,9 @@ class Psr4AutoLoaderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSplitNamespaceWithoutNamespaceArraySecondMember($result) {
+	public function testSplitNamespaceWithoutNamespaceArraySecondMember(
+		array $result
+	): void {
 		$this->assertSame("Nuke", $result[1]);
 	}
 

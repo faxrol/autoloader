@@ -1,4 +1,5 @@
 <?php
+
 namespace Laz0r\AutoLoader;
 
 /**
@@ -24,7 +25,10 @@ interface ManagerInterface {
 	 * @return string Unique identifier for the instance
 	 * @throws \Laz0r\AutoLoader\Exception\AlreadyRegisteredException
 	 */
-	public function register(AutoLoaderInterface $AutoLoader, bool $prepend = false): string;
+	public function register(
+		AutoLoaderInterface $AutoLoader,
+		bool $prepend = false
+	): string;
 
 	/**
 	 * Unregister an instance of AutoLoaderInterface
@@ -33,10 +37,10 @@ interface ManagerInterface {
 	 *
 	 * @param string $identifier
 	 *
-	 * @return \Laz0r\AutoLoader\ManagerInterface
+	 * @return $this
 	 * @throws \Laz0r\AutoLoader\Exception\InvalidIdentifierException
 	 */
-	public function unregister(string $identifier): ManagerInterface;
+	public function unregister(string $identifier): self;
 
 }
 

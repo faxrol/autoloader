@@ -1,4 +1,5 @@
 <?php
+
 namespace Laz0r\AutoLoader;
 
 /**
@@ -6,7 +7,10 @@ namespace Laz0r\AutoLoader;
  */
 abstract class AbstractAutoLoader implements AutoLoaderInterface {
 
+	/** @var string */
 	protected const INCLUDE_HELPER = AbstractIncludeHelper::class;
+
+	/** @var string */
 	protected const REQUIRE_METHOD = "requireFile";
 
 	abstract public function load(string $qcn): void;
@@ -14,7 +18,7 @@ abstract class AbstractAutoLoader implements AutoLoaderInterface {
 	/**
 	 * require a file
 	 *
-	 * @param string $file   Path of file to require
+	 * @param string $file Path of file to require
 	 *
 	 * @return void
 	 */

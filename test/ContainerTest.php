@@ -1,4 +1,5 @@
 <?php
+
 namespace Laz0r\AutoLoaderTest;
 
 use Laz0r\AutoLoader\{AutoLoaderInterface, BuilderInterface};
@@ -23,7 +24,7 @@ class ContainerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testConstruct() {
+	public function testConstruct(): void {
 		$Constructor = (new ReflectionClass(Container::class))
 			->getConstructor();
 		$Builder = $this->getMockBuilder(BuilderInterface::class)
@@ -52,7 +53,7 @@ class ContainerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testGetBuilderClonesBuilder() {
+	public function testGetBuilderClonesBuilder(): void {
 		$Builder = new class() extends TestCase implements BuilderInterface {
 
 			public function __clone() {
@@ -93,7 +94,7 @@ class ContainerTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testGetBuilderReturnsBuilderInterface() {
+	public function testGetBuilderReturnsBuilderInterface(): array {
 		$Class = new ReflectionClass(Container::class);
 		$Instance = $Class->newInstanceWithoutConstructor();
 		$Property = $Class->getProperty("Builder");
@@ -117,7 +118,7 @@ class ContainerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testGetBuilderReturnsClone($result) {
+	public function testGetBuilderReturnsClone(array $result): void {
 		$hash0 = spl_object_hash($result[0]);
 		$hash1 = spl_object_hash($result[1]);
 
@@ -129,7 +130,7 @@ class ContainerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testGetManager() {
+	public function testGetManager(): void {
 		$Class = new ReflectionClass(Container::class);
 		$Instance = $Class->newInstanceWithoutConstructor();
 		$Property = $Class->getProperty("Manager");
@@ -185,7 +186,7 @@ class ContainerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testRegisterReturnsIdentifier($result) {
+	public function testRegisterReturnsIdentifier($result): void {
 		$this->assertSame("yolo", $result);
 	}
 
@@ -194,7 +195,7 @@ class ContainerTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testSetBuilder() {
+	public function testSetBuilder(): array {
 		$Class = new ReflectionClass(Container::class);
 		$Property = $Class->getProperty("Builder");
 		$Instance = $Class->newInstanceWithoutConstructor();
@@ -221,7 +222,7 @@ class ContainerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSetBuilderReturnsSelf($result) {
+	public function testSetBuilderReturnsSelf(array $result): void {
 		$hash0 = spl_object_hash($result[0]);
 		$hash1 = spl_object_hash($result[1]);
 
@@ -233,7 +234,7 @@ class ContainerTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testSetManager() {
+	public function testSetManager(): array {
 		$Class = new ReflectionClass(Container::class);
 		$Property = $Class->getProperty("Manager");
 		$Instance = $Class->newInstanceWithoutConstructor();
@@ -260,7 +261,7 @@ class ContainerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSetManagerReturnsSelf($result) {
+	public function testSetManagerReturnsSelf(array $result): void {
 		$hash0 = spl_object_hash($result[0]);
 		$hash1 = spl_object_hash($result[1]);
 
@@ -287,7 +288,7 @@ class ContainerTest extends TestCase {
 			->method("add")
 			->withConsecutive(
 				[$this->equalTo("Imma"), $this->equalTo("/firin")],
-				[$this->equalTo("Mah"), $this->equalTo("/laz0r")]
+				[$this->equalTo("Mah"), $this->equalTo("/laz0r")],
 			)
 			->will($this->returnSelf());
 		$Builder->expects($this->once())
@@ -319,7 +320,7 @@ class ContainerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSetupReturnsIdentifier($result) {
+	public function testSetupReturnsIdentifier($result): void {
 		$this->assertSame("xvFZjo5PgG0", $result);
 	}
 

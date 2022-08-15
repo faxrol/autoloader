@@ -1,4 +1,5 @@
 <?php
+
 namespace Laz0r\AutoLoaderTest;
 
 use Laz0r\AutoLoader\{AutoLoaderInterface, Builder};
@@ -25,7 +26,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testConstructWithArgument() {
+	public function testConstructWithArgument(): void {
 		$Constructor = (new ReflectionClass(Builder::class))
 			->getConstructor();
 		$MockSut = $this->getMockBuilder(Builder::class)
@@ -45,7 +46,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testConstructWithoutArgument() {
+	public function testConstructWithoutArgument(): void {
 		$Constructor = (new ReflectionClass(Builder::class))
 			->getConstructor();
 		$MockSut = $this->getMockBuilder(Builder::class)
@@ -65,7 +66,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testAddWithExistingNamespaceAppend() {
+	public function testAddWithExistingNamespaceAppend(): array {
 		$Property = (new ReflectionClass(Builder::class))
 			->getProperty("namespaces");
 		$MockSut = $this->getMockBuilder(Builder::class)
@@ -100,7 +101,9 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testAddWithExistingNamespaceAppendReturn($result) {
+	public function testAddWithExistingNamespaceAppendReturn(
+		array $result
+	): void {
 		$hash0 = spl_object_hash($result[0]);
 		$hash1 = spl_object_hash($result[1]);
 
@@ -114,7 +117,9 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testAddWithExistingNamespaceAppendProperty($result) {
+	public function testAddWithExistingNamespaceAppendProperty(
+		array $result
+	): void {
 		$Property = (new ReflectionClass(Builder::class))
 			->getProperty("namespaces");
 
@@ -130,7 +135,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testAddWithExistingNamespacePrepend() {
+	public function testAddWithExistingNamespacePrepend(): array {
 		$Property = (new ReflectionClass(Builder::class))
 			->getProperty("namespaces");
 		$MockSut = $this->getMockBuilder(Builder::class)
@@ -165,7 +170,9 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testAddWithExistingNamespacePrependReturn($result) {
+	public function testAddWithExistingNamespacePrependReturn(
+		array $result
+	): void {
 		$hash0 = spl_object_hash($result[0]);
 		$hash1 = spl_object_hash($result[1]);
 
@@ -179,7 +186,9 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testAddWithExistingNamespacePrependProperty($result) {
+	public function testAddWithExistingNamespacePrependProperty(
+		array $result
+	): void {
 		$Property = (new ReflectionClass(Builder::class))
 			->getProperty("namespaces");
 
@@ -195,7 +204,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testAddWithNewNamespace() {
+	public function testAddWithNewNamespace(): array {
 		$MockSut = $this->getMockBuilder(Builder::class)
 			->disableOriginalConstructor()
 			->setMethods([
@@ -225,7 +234,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testAddWithNewNamespaceReturn($result) {
+	public function testAddWithNewNamespaceReturn(array $result): void {
 		$hash0 = spl_object_hash($result[0]);
 		$hash1 = spl_object_hash($result[1]);
 
@@ -239,7 +248,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testAddWithNewNamespaceProperty($result) {
+	public function testAddWithNewNamespaceProperty(array $result): void {
 		$Property = (new ReflectionClass(Builder::class))
 			->getProperty("namespaces");
 
@@ -255,7 +264,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testBuild() {
+	public function testBuild(): array {
 		$Stub0 = $this->getMockBuilder(AutoLoaderInterface::class)
 			->getMock();
 		$Stub1 = $this->getMockBuilder(AutoLoaderInterface::class)
@@ -285,7 +294,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testBuildReturn($result) {
+	public function testBuildReturn(array $result): void {
 		$hash0 = spl_object_hash($result[0]);
 		$hash1 = spl_object_hash($result[1]);
 
@@ -297,7 +306,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testGetProduct() {
+	public function testGetProduct(): void {
 		$Class = new ReflectionClass(Builder::class);
 		$Property = $Class->getProperty("product");
 		$Instance = $Class->newInstanceWithoutConstructor();
@@ -315,7 +324,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testSet() {
+	public function testSet(): array {
 		$Property = (new ReflectionClass(Builder::class))
 			->getProperty("namespaces");
 		$MockSut = $this->getMockBuilder(Builder::class)
@@ -350,7 +359,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSetReturn($result) {
+	public function testSetReturn(array $result): void {
 		$hash0 = spl_object_hash($result[0]);
 		$hash1 = spl_object_hash($result[1]);
 
@@ -364,7 +373,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSetPropertyHasExistingNamespace($result) {
+	public function testSetPropertyHasExistingNamespace(array $result): void {
 		$Property = (new ReflectionClass(Builder::class))
 			->getProperty("namespaces");
 
@@ -380,9 +389,9 @@ class BuilderTest extends TestCase {
 	 * @depends testSet
 	 * @param array $result
 	 *
-	 * @return void
+	 * @return array
 	 */
-	public function testSetPropertyHasNewNamespace($result) {
+	public function testSetPropertyHasNewNamespace(array $result): array {
 		$Property = (new ReflectionClass(Builder::class))
 			->getProperty("namespaces");
 
@@ -402,7 +411,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSetPropertyHasNewPath($namespaces) {
+	public function testSetPropertyHasNewPath(array $namespaces): void {
 		$this->assertSame(["/laz0r/src"], $namespaces["Laz0r"]);
 	}
 
@@ -411,7 +420,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testSetProduct() {
+	public function testSetProduct(): array {
 		$qcn = get_class($this->createStub(AutoLoaderInterface::class));
 		$Instance = (new ReflectionClass(Builder::class))
 			->newInstanceWithoutConstructor();
@@ -429,7 +438,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSetProductReturn($result) {
+	public function testSetProductReturn(array $result): void {
 		$hash0 = spl_object_hash($result[1]);
 		$hash1 = spl_object_hash($result[2]);
 
@@ -443,7 +452,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSetProductProperty($result) {
+	public function testSetProductProperty(array $result): void {
 		$Property = (new ReflectionClass(Builder::class))
 			->getProperty("product");
 
@@ -457,7 +466,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSetProductThrowsException() {
+	public function testSetProductThrowsException(): void {
 		$this->expectException(InvalidAutoLoaderException::class);
 
 		$Instance = (new ReflectionClass(Builder::class))
@@ -471,7 +480,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testSetProductExceptionPropertyNotChanged() {
+	public function testSetProductExceptionPropertyNotChanged(): void {
 		$Class = new ReflectionClass(Builder::class);
 		$Instance = $Class->newInstanceWithoutConstructor();
 		$Property = $Class->getProperty("product");
@@ -493,7 +502,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testConfigureLoader() {
+	public function testConfigureLoader(): array {
 		$namespaces = [
 			"Laz0r" => ["/laz0r/src"],
 			"Series" => ["/of", "/tubes"],
@@ -527,7 +536,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testConfigureLoaderReturn($result) {
+	public function testConfigureLoaderReturn(array $result): void {
 		$hash0 = spl_object_hash($result[0]);
 		$hash1 = spl_object_hash($result[1]);
 
@@ -539,9 +548,9 @@ class BuilderTest extends TestCase {
 	 * @depends testConfigureLoader
 	 * @param array $result
 	 *
-	 * @return void
+	 * @return object
 	 */
-	public function testConfigureLoaderSetsPropertyZero($result) {
+	public function testConfigureLoaderSetsPropertyZero(array $result): object {
 		$this->assertObjectHasAttribute("Laz0r", $result[0]);
 
 		return $result[0];
@@ -554,7 +563,9 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testConfigureLoaderSetsPropertyZeroValue($AutoLoader) {
+	public function testConfigureLoaderSetsPropertyZeroValue(
+		object $AutoLoader
+	): void {
 		$this->assertSame(["/laz0r/src"], $AutoLoader->Laz0r);
 	}
 
@@ -563,9 +574,9 @@ class BuilderTest extends TestCase {
 	 * @depends testConfigureLoader
 	 * @param array $result
 	 *
-	 * @return void
+	 * @return object
 	 */
-	public function testConfigureLoaderSetsPropertyOne($result) {
+	public function testConfigureLoaderSetsPropertyOne(array $result): object {
 		$this->assertObjectHasAttribute("Series", $result[0]);
 
 		return $result[0];
@@ -573,12 +584,14 @@ class BuilderTest extends TestCase {
 
 	/**
 	 * @coversNothing
-	 * @depends testConfigureLoaderSetsPropertyZero
+	 * @depends testConfigureLoaderSetsPropertyOne
 	 * @param object $AutoLoader
 	 *
 	 * @return void
 	 */
-	public function testConfigureLoaderSetsPropertyOneValue($AutoLoader) {
+	public function testConfigureLoaderSetsPropertyOneValue(
+		object $AutoLoader
+	): void {
 		$this->assertSame(["/of", "/tubes"], $AutoLoader->Series);
 	}
 
@@ -587,7 +600,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return array
 	 */
-	public function testCreateLoader() {
+	public function testCreateLoader(): array {
 		$qcn = get_class($this->createStub(AutoLoaderInterface::class));
 		$MockSut = $this->getMockBuilder(Builder::class)
 			->disableOriginalConstructor()
@@ -614,7 +627,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testCreateLoaderReturnsObject($result) {
+	public function testCreateLoaderReturnsObject(array $result): void {
 		$this->assertIsObject($result[1]);
 	}
 
@@ -626,7 +639,9 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testCreateLoaderReturnsInstanceOfProduct($result) {
+	public function testCreateLoaderReturnsInstanceOfProduct(
+		array $result
+	): void {
 		$this->assertInstanceOf($result[0], $result[1]);
 	}
 
@@ -635,7 +650,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testGetAll() {
+	public function testGetAll(): void {
 		$Class = new ReflectionClass(Builder::class);
 		$Method = $Class->getMethod("getAll");
 		$Property = $Class->getProperty("namespaces");
@@ -655,7 +670,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testCanonicalizeNamespace() {
+	public function testCanonicalizeNamespace(): void {
 		$Class = new ReflectionClass(Builder::class);
 		$Method = $Class->getMethod("canonicalizeNamespace");
 		$Instance = $Class->newInstanceWithoutConstructor();
@@ -672,7 +687,7 @@ class BuilderTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testCanonicalizePath() {
+	public function testCanonicalizePath(): void {
 		$Class = new ReflectionClass(Builder::class);
 		$Method = $Class->getMethod("canonicalizePath");
 		$Instance = $Class->newInstanceWithoutConstructor();
