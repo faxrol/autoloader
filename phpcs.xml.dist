@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<ruleset>
+
+	<file>src/</file>
+	<file>test/</file>
+
+	<exclude-pattern>/_files/</exclude-pattern>
+
+	<rule ref="vendor/fig-r/psr2r-sniffer/PSR2R/ruleset.xml"/>
+	<rule ref="PSR2.Namespaces.UseDeclaration">
+		<severity>0</severity>
+	</rule>
+	<rule ref="PSR2R.Commenting.DocBlock">
+		<severity>0</severity>
+	</rule>
+	<rule ref="PSR2R.Commenting.DocBlockTagTypes">
+		<severity>0</severity>
+	</rule>
+	<rule ref="PSR2R.PHP.PreferStaticOverSelf">
+		<severity>0</severity>
+	</rule>
+	<rule ref="PSR2R.PHP.SingleQuote">
+		<severity>0</severity>
+	</rule>
+	<rule ref="SlevomatCodingStandard.Namespaces.UseSpacing">
+		<severity>0</severity>
+	</rule>
+	<rule ref="SlevomatCodingStandard.Whitespaces.DuplicateSpaces">
+		<severity>0</severity>
+	</rule>
+	<rule ref="Spryker.Commenting.DisallowArrayTypeHintSyntax">
+		<severity>0</severity>
+	</rule>
+	<rule ref="Spryker.Commenting.DocBlockNoInlineAlignment">
+		<severity>0</severity>
+	</rule>
+	<rule ref="Spryker.Commenting.DocBlockTagOrder">
+		<severity>0</severity>
+	</rule>
+</ruleset>
+<!-- vi:set ts=4 sw=4 noet: -->
