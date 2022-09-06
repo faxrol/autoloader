@@ -2,10 +2,12 @@
 
 namespace Laz0r\AutoLoader;
 
+use stdClass;
+
 /**
  * Base class for AutoLoaderInterface implementations
  */
-abstract class AbstractAutoLoader implements AutoLoaderInterface {
+abstract class AbstractAutoLoader extends stdClass implements AutoLoaderInterface {
 
 	/** @var string */
 	protected const INCLUDE_HELPER = AbstractIncludeHelper::class;
