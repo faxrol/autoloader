@@ -7,6 +7,7 @@ use Laz0r\AutoLoader\Exception\InvalidAutoLoaderException;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Throwable;
+use stdClass;
 
 /**
  * @coversDefaultClass \Laz0r\AutoLoader\Builder
@@ -511,7 +512,7 @@ class BuilderTest extends TestCase {
 			->disableOriginalConstructor()
 			->setMethods(["getAll"])
 			->getMock();
-		$AutoLoader = new class() implements AutoLoaderInterface {
+		$AutoLoader = new class() extends stdClass implements AutoLoaderInterface {
 			public function load(string $qcn): void {
 			}
 		};

@@ -54,39 +54,18 @@ class ContainerTest extends TestCase {
 	 * @return void
 	 */
 	public function testGetBuilderClonesBuilder(): void {
-		$Builder = new class() extends TestCase implements BuilderInterface {
-
-			public function __clone() {
-				$this->that->assertTrue(true);
-			}
-
-			public function add(
-				string $namespace,
-				string $path,
-				bool $prepend = false
-			): BuilderInterface {
-			}
-
-			public function build(): AutoLoaderInterface {
-			}
-
-			public function set(
-				string $namespace,
-				string $path
-			): BuilderInterface {
-			}
-
-		};
-
+		$Stub = $this->createStub(BuilderInterface::class);
 		$Class = new ReflectionClass(Container::class);
 		$Instance = $Class->newInstanceWithoutConstructor();
 		$Property = $Class->getProperty("Builder");
 
 		$Property->setAccessible(true);
-		$Property->setValue($Instance, $Builder);
-		$Builder->that = $this;
+		$Property->setValue($Instance, $Stub);
 
-		$Instance->getBuilder();
+		$Result = $Instance->getBuilder();
+
+		$this->assertNotSame($Stub, $Result);
+		$this->assertInstanceOf(get_class($Stub), $Result);
 	}
 
 	/**
