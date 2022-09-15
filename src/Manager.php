@@ -119,7 +119,7 @@ class Manager implements ManagerInterface {
 	/**
 	 * Set an instance of AutoLoaderInterface by identifier
 	 *
-	 * @param string                                $identifier
+	 * @param string $identifier
 	 * @param \Laz0r\AutoLoader\AutoLoaderInterface $AutoLoader
 	 *
 	 * @return void
@@ -134,9 +134,9 @@ class Manager implements ManagerInterface {
 	/**
 	 * Wraps spl_autoload_register
 	 *
-	 * @param       callable              $autoload_function
+	 * @param callable $autoload_function
 	 * @psalm-param callable(string):void $autoload_function
-	 * @param       bool                  $prepend
+	 * @param bool $prepend
 	 *
 	 * @return void
 	 */
@@ -150,7 +150,7 @@ class Manager implements ManagerInterface {
 	/**
 	 * Wraps spl_autoload_unregister
 	 *
-	 * @param       callable              $autoload_function
+	 * @param callable $autoload_function
 	 * @psalm-param callable(string):void $autoload_function
 	 *
 	 * @return void

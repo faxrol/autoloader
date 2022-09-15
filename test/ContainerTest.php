@@ -2,8 +2,12 @@
 
 namespace Laz0r\AutoLoaderTest;
 
-use Laz0r\AutoLoader\{AutoLoaderInterface, BuilderInterface};
-use Laz0r\AutoLoader\{Container, ManagerInterface};
+use Laz0r\AutoLoader\{
+	AutoLoaderInterface,
+	BuilderInterface,
+	Container,
+	ManagerInterface,
+};
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 

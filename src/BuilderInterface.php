@@ -11,8 +11,8 @@ interface BuilderInterface {
 	 * Add a path to the set of paths for the given namespace
 	 *
 	 * @param string $namespace e.g. "Foo\\Bar"
-	 * @param string $path      e.g. "./vendor/foo/bar/src"
-	 * @param bool   $prepend   Whether to prepend or append the path
+	 * @param string $path e.g. "./vendor/foo/bar/src"
+	 * @param bool $prepend Whether to prepend or append the path
 	 *
 	 * @return $this
 	 */
@@ -35,7 +35,7 @@ interface BuilderInterface {
 	 * Will override the path set for the given namespace.
 	 *
 	 * @param string $namespace e.g. "Foo\\Bar"
-	 * @param string $path      e.g. "./vendor/foo/bar/src"
+	 * @param string $path e.g. "./vendor/foo/bar/src"
 	 *
 	 * @return $this
 	 */

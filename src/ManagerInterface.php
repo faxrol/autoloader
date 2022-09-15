@@ -20,7 +20,7 @@ interface ManagerInterface {
 	 * Register an instance of AutoLoaderInterface
 	 *
 	 * @param \Laz0r\AutoLoader\AutoLoaderInterface $AutoLoader
-	 * @param bool                                  $prepend
+	 * @param bool $prepend
 	 *
 	 * @return string Unique identifier for the instance
 	 * @throws \Laz0r\AutoLoader\Exception\AlreadyRegisteredException
