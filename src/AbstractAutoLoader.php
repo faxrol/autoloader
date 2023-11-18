@@ -13,7 +13,7 @@ abstract class AbstractAutoLoader extends stdClass implements AutoLoaderInterfac
 	protected const INCLUDE_HELPER = AbstractIncludeHelper::class;
 
 	/** @var string */
-	protected const REQUIRE_METHOD = "requireFile";
+	protected const REQUIRE_METHOD = "includeFile";
 
 	abstract public function load(string $qcn): void;
 
